@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { useUiPathAuth } from '@/contexts/UiPathAuthContext';
+import { useUiPathAuth } from '@/hooks/useUiPathAuth';
 import { useUiPathProcesses, useStartProcess } from '@/hooks/useUiPathProcesses';
 import { FilterControls } from '@/components/shared/FilterControls';
 import { StatusBadge } from '@/components/shared/StatusBadge';
@@ -33,16 +33,16 @@ export function ProcessesTable() {
   }
   if (error) {
     return (
-      <ErrorState 
-        message="Failed to load processes" 
+      <ErrorState
+        message="Failed to load processes"
         onRetry={refetch}
       />
     );
   }
-  const processArray = Array.isArray(processes) ? processes : processes?.value || [];
+  const processArray = Array.isArray(processes) ? processes : (processes as any)?.value || [];
   if (processArray.length === 0) {
     return (
-      <EmptyState 
+      <EmptyState
         icon={Package}
         title="No processes found"
         description="Create processes in UiPath Studio and publish them to Orchestrator to see them here."

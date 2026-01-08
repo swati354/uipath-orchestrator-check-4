@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useUiPathAuth } from '@/contexts/UiPathAuthContext';
+import { useUiPathAuth } from '@/hooks/useUiPathAuth';
 import { useUiPathAssets } from '@/hooks/useUiPathAssets';
 import { FilterControls } from '@/components/shared/FilterControls';
 import { LoadingState } from '@/components/shared/LoadingState';
@@ -62,16 +62,16 @@ export function AssetsTable() {
   }
   if (error) {
     return (
-      <ErrorState 
-        message="Failed to load assets" 
+      <ErrorState
+        message="Failed to load assets"
         onRetry={refetch}
       />
     );
   }
-  const assetArray = Array.isArray(assets) ? assets : assets?.value || [];
+  const assetArray = Array.isArray(assets) ? assets : (assets as any)?.value || [];
   if (assetArray.length === 0) {
     return (
-      <EmptyState 
+      <EmptyState
         icon={Settings}
         title="No assets found"
         description="Create assets in UiPath Orchestrator to store configuration values and credentials."
