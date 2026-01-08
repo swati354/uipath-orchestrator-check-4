@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useUiPathAuth } from '@/hooks/useUiPathAuth';
+import { useUiPathAuth } from "../../hooks/useUiPathAuth";
 import { useUiPathTasks, useAssignTask, useCompleteTask } from '@/hooks/useUiPathTasks';
 import { FilterControls } from '@/components/shared/FilterControls';
 import { StatusBadge } from '@/components/shared/StatusBadge';
@@ -35,9 +35,9 @@ export function TasksTable() {
   } = useTaskFilters(tasks || []);
   const handleAssignTask = (userNameOrEmail: string, reason?: string) => {
     if (selectedTaskForAssignment) {
-      assignTask({ 
-        taskId: selectedTaskForAssignment.id, 
-        userNameOrEmail 
+      assignTask({
+        taskId: selectedTaskForAssignment.id,
+        userNameOrEmail
       });
       setSelectedTaskForAssignment(null);
     }
@@ -70,8 +70,8 @@ export function TasksTable() {
     return (
       <Badge variant="outline" className={`text-xs font-medium border ${colors[priority] || 'bg-gray-100 text-gray-800 border-gray-200'}`}>
         {priority}
-      </Badge>
-    );
+      </Badge>);
+
   };
   const getStatusIcon = (status: string) => {
     switch (status?.toLowerCase()) {
@@ -93,9 +93,9 @@ export function TasksTable() {
     return (
       <ErrorState
         message="Failed to load tasks"
-        onRetry={refetch}
-      />
-    );
+        onRetry={refetch} />);
+
+
   }
   const taskArray = Array.isArray(tasks) ? tasks : tasks?.value || [];
   if (taskArray.length === 0) {
@@ -103,9 +103,9 @@ export function TasksTable() {
       <EmptyState
         icon={CheckCircle}
         title="No tasks found"
-        description="Tasks from UiPath Action Center will appear here when available."
-      />
-    );
+        description="Tasks from UiPath Action Center will appear here when available." />);
+
+
   }
   return (
     <>
@@ -120,18 +120,18 @@ export function TasksTable() {
             onSearchChange={setSearchFilter}
             searchPlaceholder="Search tasks..."
             statusOptions={[
-              { value: 'all', label: 'All Statuses' },
-              { value: 'Pending', label: 'Pending' },
-              { value: 'InProgress', label: 'In Progress' },
-              { value: 'Completed', label: 'Completed' }
-            ]}
-          />
+            { value: 'all', label: 'All Statuses' },
+            { value: 'Pending', label: 'Pending' },
+            { value: 'InProgress', label: 'In Progress' },
+            { value: 'Completed', label: 'Completed' }]
+            } />
+
           <div className="flex items-center gap-2">
             <select
               value={priorityFilter}
               onChange={(e) => setPriorityFilter(e.target.value)}
-              className="h-8 px-3 text-xs border border-input bg-background rounded-md"
-            >
+              className="h-8 px-3 text-xs border border-input bg-background rounded-md">
+
               <option value="all">All Priorities</option>
               <option value="Critical">Critical</option>
               <option value="High">High</option>
@@ -154,17 +154,17 @@ export function TasksTable() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {filteredData.map((task: any) => (
-                  <TableRow key={task.id} className="border-b border-gray-200 hover:bg-gray-50">
+                {filteredData.map((task: any) =>
+                <TableRow key={task.id} className="border-b border-gray-200 hover:bg-gray-50">
                     <TableCell className="px-3 py-2">
                       <div>
                         <div className="text-sm font-medium text-foreground flex items-center gap-2">
                           {getStatusIcon(task.status)}
                           {task.title || task.name || `Task ${task.id}`}
                         </div>
-                        {task.description && (
-                          <div className="text-xs text-muted-foreground mt-1">{task.description}</div>
-                        )}
+                        {task.description &&
+                      <div className="text-xs text-muted-foreground mt-1">{task.description}</div>
+                      }
                       </div>
                     </TableCell>
                     <TableCell className="px-3 py-2">
@@ -186,49 +186,49 @@ export function TasksTable() {
                     <TableCell className="px-3 py-2">
                       <div className="flex items-center gap-2">
                         <Button
-                          size="sm"
-                          variant="outline"
-                          onClick={() => setSelectedTaskForAssignment(task)}
-                          disabled={isAssigning}
-                          className="h-7 px-3 text-xs"
-                        >
+                        size="sm"
+                        variant="outline"
+                        onClick={() => setSelectedTaskForAssignment(task)}
+                        disabled={isAssigning}
+                        className="h-7 px-3 text-xs">
+
                           <UserPlus className="w-3 h-3 mr-1" />
                           Assign
                         </Button>
                         <Button
-                          size="sm"
-                          onClick={() => setSelectedTaskForCompletion(task)}
-                          disabled={isCompleting || task.status === 'Completed'}
-                          className="h-7 px-3 text-xs"
-                        >
+                        size="sm"
+                        onClick={() => setSelectedTaskForCompletion(task)}
+                        disabled={isCompleting || task.status === 'Completed'}
+                        className="h-7 px-3 text-xs">
+
                           <CheckCircle className="w-3 h-3 mr-1" />
                           Complete
                         </Button>
                       </div>
                     </TableCell>
                   </TableRow>
-                ))}
+                )}
               </TableBody>
             </Table>
           </CardContent>
         </Card>
       </div>
-      {/* Assignment Dialog */}
+      {}
       <TaskAssignmentDialog
         task={selectedTaskForAssignment}
         isOpen={!!selectedTaskForAssignment}
         onClose={() => setSelectedTaskForAssignment(null)}
         onAssign={handleAssignTask}
-        isLoading={isAssigning}
-      />
-      {/* Completion Dialog */}
+        isLoading={isAssigning} />
+
+      {}
       <TaskCompletionDialog
         task={selectedTaskForCompletion}
         isOpen={!!selectedTaskForCompletion}
         onClose={() => setSelectedTaskForCompletion(null)}
         onComplete={handleCompleteTask}
-        isLoading={isCompleting}
-      />
-    </>
-  );
+        isLoading={isCompleting} />
+
+    </>);
+
 }
