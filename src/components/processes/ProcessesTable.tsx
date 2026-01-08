@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { useUiPathAuth } from '@/hooks/useUiPathAuth';
+import { useUiPathAuth } from "../../hooks/useUiPathAuth";
 import { useUiPathProcesses, useStartProcess } from '@/hooks/useUiPathProcesses';
 import { FilterControls } from '@/components/shared/FilterControls';
 import { StatusBadge } from '@/components/shared/StatusBadge';
@@ -35,9 +35,9 @@ export function ProcessesTable() {
     return (
       <ErrorState
         message="Failed to load processes"
-        onRetry={refetch}
-      />
-    );
+        onRetry={refetch} />);
+
+
   }
   const processArray = Array.isArray(processes) ? processes : (processes as any)?.value || [];
   if (processArray.length === 0) {
@@ -45,9 +45,9 @@ export function ProcessesTable() {
       <EmptyState
         icon={Package}
         title="No processes found"
-        description="Create processes in UiPath Studio and publish them to Orchestrator to see them here."
-      />
-    );
+        description="Create processes in UiPath Studio and publish them to Orchestrator to see them here." />);
+
+
   }
   return (
     <div className="space-y-4">
@@ -60,12 +60,12 @@ export function ProcessesTable() {
         onSearchChange={setSearchFilter}
         searchPlaceholder="Search processes..."
         statusOptions={[
-          { value: 'all', label: 'All Statuses' },
-          { value: 'Available', label: 'Available' },
-          { value: 'Running', label: 'Running' },
-          { value: 'Failed', label: 'Failed' }
-        ]}
-      />
+        { value: 'all', label: 'All Statuses' },
+        { value: 'Available', label: 'Available' },
+        { value: 'Running', label: 'Running' },
+        { value: 'Failed', label: 'Failed' }]
+        } />
+
       <Card>
         <CardContent className="p-0">
           <Table>
@@ -80,14 +80,14 @@ export function ProcessesTable() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {filteredData.map((process: any) => (
-                <TableRow key={process.id} className="border-b border-gray-200 hover:bg-gray-50">
+              {filteredData.map((process: any) =>
+              <TableRow key={process.id} className="border-b border-gray-200 hover:bg-gray-50">
                   <TableCell className="px-3 py-2">
                     <div>
                       <div className="text-sm font-medium text-foreground">{process.name}</div>
-                      {process.description && (
-                        <div className="text-xs text-muted-foreground mt-1">{process.description}</div>
-                      )}
+                      {process.description &&
+                    <div className="text-xs text-muted-foreground mt-1">{process.description}</div>
+                    }
                     </div>
                   </TableCell>
                   <TableCell className="px-3 py-2">
@@ -106,21 +106,21 @@ export function ProcessesTable() {
                   </TableCell>
                   <TableCell className="px-3 py-2">
                     <Button
-                      size="sm"
-                      onClick={() => handleStartProcess(process.key, process.folderId || 1)}
-                      disabled={isStarting}
-                      className="h-7 px-3 text-xs"
-                    >
+                    size="sm"
+                    onClick={() => handleStartProcess(process.key, process.folderId || 1)}
+                    disabled={isStarting}
+                    className="h-7 px-3 text-xs">
+
                       <Play className="w-3 h-3 mr-1" />
                       Start
                     </Button>
                   </TableCell>
                 </TableRow>
-              ))}
+              )}
             </TableBody>
           </Table>
         </CardContent>
       </Card>
-    </div>
-  );
+    </div>);
+
 }
