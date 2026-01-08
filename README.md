@@ -2,7 +2,7 @@
 
 Professional enterprise dashboard for managing UiPath Orchestrator processes, assets, and Action Center tasks.
 
-[cloudflarebutton]
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/swati354/uipath-orchestrator-check-4)
 
 ## Overview
 
@@ -165,7 +165,7 @@ src/
 
 This application is optimized for deployment on Cloudflare Pages:
 
-[cloudflarebutton]
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/swati354/uipath-orchestrator-check-4)
 
 **Manual Deployment:**
 
